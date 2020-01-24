@@ -1,0 +1,23 @@
+package com.algo.linkedlist;
+
+public class LinkedList {
+
+ Node head;
+
+ public LinkedList(int size) {
+  head = new Node(1);
+  Node tempNode = null;
+  for (int i = 2; i <= size; i++) {
+   Node node = new Node(i);
+   if (i == 2) {
+    head.next = node;
+    tempNode = head.next;
+   } else {
+    tempNode.next = node;
+    tempNode = node;
+   }
+  }
+ }
+}
+
+
