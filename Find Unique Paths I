@@ -1,0 +1,45 @@
+class Solution {
+  public int uniquePaths(int m, int n) {
+    int[] currentRow = new int[n];
+    for (int i = 0; i < n; i++) {
+      currentRow[i] = 1;
+    }
+    for (int i = 1; i < m; i++) {
+      for (int j = 1; j < n; j++) {
+        currentRow[j] = currentRow[j] + currentRow[j - 1];
+      }
+    }
+    return currentRow[n - 1];
+  }}
+  
+  /*Using Backtracking and Memoization */
+  
+  class Solution {
+
+  public int uniquePaths(int m, int n) {
+    int[][] board = new int[m][n];
+    board[m - 1][n - 1] = 1;
+    int count = backTrack(board, m, n, 0, 0);
+    return count;
+  }
+
+  private int backTrack(int[][] board, int m, int n, int i, int j) {
+    if (i == m || j == n) return 0;
+    if (board[i][j] != 0) return board[i][j];
+    int c1 = backTrack(board, m, n, (i + 1), j);
+    int c2 = backTrack(board, m, n, i, (j + 1));
+    board[i][j] = (c1 + c2);
+    return board[i][j];
+  }
+}
+
+
+I/O :
+Input : A = 2, B = 2
+Output : 2
+
+2 possible routes : (0, 0) -> (0, 1) -> (1, 1) 
+              OR  : (0, 0) -> (1, 0) -> (1, 1)
+              
+              
+              Complexity : O (m * n)
