@@ -1,0 +1,92 @@
+/*Following is the implementation of this Algorithm. First of all, we have used the TreeNode for the solution.*/
+public class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+/*Count the number of nodes in a complete binary tree by CompleteBinaryTree.java*/
+
+public class CompleteBinaryTree {
+
+    public int countNodes(TreeNode root) {
+
+        if (root == null) {
+            return 0;
+        }
+        int lh = getLeftHeight(root);
+        int rh = getRightHeight(root);
+        if (lh == rh) {
+            int count = (int) Math.pow(2, lh) - 1;
+            return count;
+        }
+        return countNodes(root.left) + countNodes(root.right) + 1;
+    }
+
+    private int getLeftHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int height = 0;
+        while (node != null) {
+            height++;
+            node = node.left;
+        }
+        return height;
+    }
+
+    private int getRightHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int height = 0;
+        while (node != null) {
+            height++;
+            node = node.right;
+        }
+        return height;
+    }
+}
+/*Now test the implementation, we have used this Binary Tree implementation to test this solution.*/
+
+public class TestCompleteBinaryTree {
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(30);
+        BinaryTree binaryTree = new BinaryTree(root);
+        TreeNode b = new TreeNode(20);
+        TreeNode c = new TreeNode(40);
+        TreeNode d = new TreeNode(10);
+        TreeNode e = new TreeNode(25);
+        TreeNode f = new TreeNode(35);
+
+        root.left = b;
+        root.right = c;
+        b.left = d;
+        b.right = e;
+        c.left = f;
+
+        binaryTree.prettyPrintTree(root);
+        CompleteBinaryTree completeBinaryTree= new CompleteBinaryTree();
+        int count = completeBinaryTree.countNodes(root);
+        System.out.println("Total Nodes : " + count);
+    }
+}
+
+Time Complexity: O(n) where n is the number of nodes of the Tree.
+
+I/O :
+
+Input: 
+    1
+   /  \
+  2    3
+ / \  /
+4  5 6
+
+Output: 6
