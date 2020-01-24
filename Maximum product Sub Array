@@ -1,0 +1,25 @@
+public int maxProduct(int[] nums) {
+  if (nums == null || nums.length == 0) return 0;
+  if (nums.length == 1) return nums[0];
+  int maxEnding = 0, minEnding = 0, maxSoFar = 0;
+  for (int i: nums) {
+    int temp = maxEnding;
+    maxEnding = Math.max(i, Math.max(i * maxEnding, i * minEnding));
+    minEnding = Math.min(i, Math.min(i * temp, i * minEnding));
+    maxSoFar = Math.max(maxSoFar, maxEnding);
+  }
+  return maxSoFar;
+}
+
+
+
+I/O :
+
+Input: nums[] = [6, -3, -10, 0, 2] 
+Output: 180 
+Explanation: [6, -3, -10] has the largest product 180.
+
+Complexity :
+
+Time Complexity: O(n). 
+Space Complexity: O(1).
