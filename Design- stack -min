@@ -1,0 +1,64 @@
+class Node {
+  int value;
+  int min;
+  public Node(int v, int m) {
+    value = v;
+    min = m;
+  }
+}
+class MinStack {
+
+  private LinkedList<Node> data;
+  
+  /** initialize your data structure here. */
+  public MinStack() {
+    data = new LinkedList<>();
+  }
+
+  public void push(int x) {
+    Node node = null;
+    if (data.isEmpty()) {
+      node = new Node(x, x);
+    } else {
+      Node prev = data.getLast();
+      node = new Node(x, Math.min(x, prev.min));
+    }
+    data.add(node);
+  }
+
+  public void pop() {
+    if (!data.isEmpty()) data.removeLast();
+  }
+
+  public int top() {
+    return data.isEmpty() ? -1 : data.getLast().value;
+
+  }
+
+  public int getMin() {
+    return data.isEmpty() ? -1 : data.getLast().min;
+  }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+
+I/O :
+
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --> Returns -3.
+minStack.pop();
+minStack.top();      --> Returns 0.
+minStack.getMin();   --> Returns -2.
+
+
+
