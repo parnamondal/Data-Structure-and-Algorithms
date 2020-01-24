@@ -1,0 +1,36 @@
+package com.tuturself.rec;
+
+public class GCDCalculator {
+
+  public static int getGCD(int m, int n, int smaller) {
+
+    if (m < 0 || n < 0) {
+      System.out.println("NO GCD FOUND");
+      return -1;
+    }
+    // when one of the number is Zero
+    // In that case the non-zero number is the GCD
+    if (smaller == 0) {
+      return m == 0 ? n : m;
+    }
+
+    if (((m % smaller) == 0) && ((n % smaller) == 0))
+      return smaller;
+    else
+      return getGCD(m, n, smaller - 1);
+  }
+
+  public static void main(String[] args) {
+    int a = 55;
+    int b = 77;
+    int smaller = a > b ? b : a;
+
+    System.out.println("GCD of a: " + a + " and b: " + b + " is: " +
+      getGCD(a, b, smaller));
+
+  }
+}
+The output of the program is :
+
+GCD of a: 35 and b: 77 is: 7
+
